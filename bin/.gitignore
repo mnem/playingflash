@@ -1,0 +1,4 @@
+*.swf
+*.ipa
+!ios-package.sh
+!PlayingPunkApp-app.xml

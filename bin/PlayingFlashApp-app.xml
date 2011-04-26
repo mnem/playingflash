@@ -1,0 +1,63 @@
+<application xmlns="http://ns.adobe.com/air/application/2.6">
+    <id>noiseandheat.games.playingflash.PlayingFlashApp</id>
+    <name>Playing Flash</name>
+    <filename>PlayingFlashApp</filename>
+    <versionNumber>0.0.1</versionNumber>
+    <initialWindow>
+        <content>PlayingFlashApp.swf</content>
+        <aspectRatio>portrait</aspectRatio>
+        <autoOrients>false</autoOrients>
+        <fullScreen>true</fullScreen>
+        <renderMode>gpu</renderMode>
+        <softKeyboardBehavior>none</softKeyboardBehavior>
+    </initialWindow>
+
+    <supportedProfiles>mobileDevice</supportedProfiles>
+
+    <iPhone>
+        <InfoAdditions>
+            <![CDATA[
+                <key>UIStatusBarStyle</key>
+                <string>UIStatusBarStyleBlackOpaque</string>
+                <key>UIRequiresPersistentWiFi</key>
+                <string>YES</string>
+                <key>UIDeviceFamily</key>
+                <array>
+                    <string>1</string>
+                    <string>2</string>
+                </array>
+            ]]>
+        </InfoAdditions>
+        <requestedDisplayResolution>high</requestedDisplayResolution>
+    </iPhone>
+
+    <!-- Just blatting in all the android permissions while testing -->
+    <android>
+        <manifestAdditions>
+            <![CDATA[
+                <manifest>
+                    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+                    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+                    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+                    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+                    <uses-permission android:name="android.permission.CAMERA" />
+                    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+                    <uses-permission android:name="android.permission.INTERNET" />
+                    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+                    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+                    <uses-permission android:name="android.permission.WAKE_LOCK" />
+                    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+                </manifest>
+            ]]>
+        </manifestAdditions>
+    </android>
+
+<!--
+    <icon>
+        <image36x36>assets/icon36.png</image36x36>
+        <image48x48>assets/icon48.png</image48x48>
+        <image72x72>assets/icon72.png</image72x72>
+    </icon>
+ -->
+
+</application>

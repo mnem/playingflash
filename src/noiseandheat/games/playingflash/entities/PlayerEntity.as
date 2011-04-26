@@ -34,8 +34,8 @@ package noiseandheat.games.playingflash.entities
         {
             if(app.mouseDown)
             {
-                targetX = app.currentMouseX;
-                targetY = app.currentMouseY;
+                targetX = app.mouseX;
+                targetY = app.mouseY;
             }
 
             if(app.mouseReleased)
@@ -58,8 +58,8 @@ package noiseandheat.games.playingflash.entities
 
             moveTowards(tX, tY, v);
 
-//            var t:TargetEntity = collide("target", x, y) as TargetEntity;
-//            if(t) t.spawn();
+            var t:TargetEntity = collide(x, y) as TargetEntity;
+            if(t) t.spawn();
         }
     }
 }

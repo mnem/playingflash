@@ -1,33 +1,28 @@
-﻿package noiseandheat.games
+package noiseandheat.games.playingflash
 {
-    import flash.events.MouseEvent;
-    import noiseandheat.games.playingflash.worlds.GameWorld;
-
-    import flash.display.Sprite;
-    import flash.display.StageAlign;
-    import flash.display.StageDisplayState;
-    import flash.display.StageQuality;
-    import flash.display.StageScaleMode;
-    import flash.events.Event;
-    import flash.utils.getTimer;
-
-    [SWF(backgroundColor="#000000", frameRate="60", width="480", height="320")]
-    public class PlayingFlashApp extends Sprite
+    import flash.display.LoaderInfo;
+    /**
+     * Copyright (c) 2011 HuzuTech
+     */
+    public class Application
     {
         public var time:int;
         public var timeSinceLastUpdate:int;
         public var mouseDown:Boolean;
         public var mouseReleased:Boolean;
         public var mousePressed:Boolean;
-        public var currentMouseX:Number;
-        public var currentMouseY:Number;
+        public var mouseX:Number;
+        public var mouseY:Number;
+        public var width:int;
+        public var height:int;
 
-        protected var _activeWorld:GameWorld;
+        protected var _seed:uint;
+        protected var loaderInfo:LoaderInfo;
 
-        public function PlayingFlashApp()
+        public function Application(loaderInfo:LoaderInfo)
         {
+            this.loaderInfo = loaderInfo;
             _seed = clamp(2147483647 * Math.random(), 1, 2147483646);
-            addEventListener(Event.ADDED_TO_STAGE, addedToStage);
         }
 
         public function get framerate():Number
@@ -45,78 +40,9 @@
             return fr;
         }
 
-        protected function addedToStage(event:Event):void
-        {
-            removeEventListener(Event.ADDED_TO_STAGE, addedToStage);
-            setStageProperties();
-            init();
-
-            time = getTimer();
-            timeSinceLastUpdate = 0;
-
-            captureStageEvents();
-        }
-
-        protected function captureStageEvents():void
-        {
-            addEventListener(Event.ENTER_FRAME, update);
-            stage.addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
-            stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
-        }
-
-        protected function handleMouseDown(event:MouseEvent):void
-        {
-            mouseDown = true;
-            mousePressed = true;
-        }
-
-        protected function handleMouseUp(event:MouseEvent):void
-        {
-            mouseDown = false;
-            mouseReleased = true;
-        }
-
-        protected function setStageProperties():void
-        {
-            stage.align = StageAlign.TOP_LEFT;
-            stage.scaleMode = StageScaleMode.NO_SCALE;
-            stage.displayState = StageDisplayState.NORMAL;
-            stage.quality = StageQuality.LOW;
-        }
-
-        protected function set activeWorld(world:GameWorld):void
-        {
-            if(_activeWorld != null) removeChild(_activeWorld);
-            _activeWorld = world;
-            addChild(_activeWorld);
-            _activeWorld.app = this;
-            _activeWorld.activate();
-        }
-
-        protected function init():void
-        {
-            activeWorld = new GameWorld();
-        }
-
         public function get actualFramerate():Number
         {
             return 1000.0 / timeSinceLastUpdate;
-        }
-
-        protected function update(event:Event):void
-        {
-            var now:int = getTimer();
-            timeSinceLastUpdate = now - time;
-            time = now;
-
-            currentMouseX = stage.mouseX;
-            currentMouseY = stage.mouseY;
-
-            if(_activeWorld != null)
-                _activeWorld.update();
-
-            mouseReleased = false;
-            mousePressed = false;
         }
 
         /**
@@ -179,6 +105,5 @@
             _seed = (_seed * 16807) % 2147483647;
             return (_seed / 2147483647) * amount;
         }
-        protected var _seed:uint;
     }
 }

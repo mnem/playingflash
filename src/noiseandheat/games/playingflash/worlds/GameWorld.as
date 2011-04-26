@@ -1,11 +1,13 @@
 package noiseandheat.games.playingflash.worlds
 {
-    import noiseandheat.games.PlayingFlashApp;
+    import noiseandheat.games.playingflash.Application;
     import noiseandheat.games.playingflash.entities.Entity;
     import noiseandheat.games.playingflash.entities.FramerateVisualiserEntity;
     import noiseandheat.games.playingflash.entities.PlayerEntity;
+    import noiseandheat.games.playingflash.entities.TargetEntity;
 
     import flash.display.Sprite;
+
 
     /**
      * Copyright (c) 2011 HuzuTech
@@ -15,7 +17,7 @@ package noiseandheat.games.playingflash.worlds
     {
         protected var entities:Vector.<Entity>;
 
-        public var app:PlayingFlashApp;
+        public var app:Application;
 
         public function GameWorld()
         {
@@ -26,13 +28,23 @@ package noiseandheat.games.playingflash.worlds
         {
             add(new FramerateVisualiserEntity());
             add(new PlayerEntity());
+            add(new TargetEntity());
         }
 
         public function add(entity:Entity):void
         {
             entity.app = app;
             entity.world = this;
+
+            var prev:Entity;
+            if(entities.length > 0) prev = entities[entities.length - 1];
+
             entities.push(entity);
+
+            entity.prev = prev;
+            if(prev) prev.next = entity;
+            entity.head = entities[0];
+
             addChild(entity);
             entity.init();
         }

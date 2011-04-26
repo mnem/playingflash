@@ -58,7 +58,7 @@ package noiseandheat.games.playingflash.entities
 
             moveTowards(tX, tY, v);
 
-            var t:TargetEntity = collide(x, y) as TargetEntity;
+            var t:TargetEntity = collide("target", x, y) as TargetEntity;
             if(t) t.spawn();
         }
     }

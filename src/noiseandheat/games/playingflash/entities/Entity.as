@@ -1,10 +1,12 @@
 package noiseandheat.games.playingflash.entities
 {
-    import flash.geom.Rectangle;
     import noiseandheat.games.playingflash.Application;
     import noiseandheat.games.playingflash.worlds.GameWorld;
+
+    import flash.display.DisplayObjectContainer;
     import flash.display.Sprite;
     import flash.geom.Point;
+    import flash.geom.Rectangle;
 
 
     /**
@@ -19,7 +21,12 @@ package noiseandheat.games.playingflash.entities
         public var app:Application;
         public var world:GameWorld;
 
+        public var type:String;
+
         protected var _point:Point = new Point();
+
+        protected var hitRect:Rectangle;
+        protected var hitRectTranslated:Rectangle = new Rectangle();
 
         public function init():void
         {
@@ -31,20 +38,23 @@ package noiseandheat.games.playingflash.entities
 
         }
 
-        public function collide(x:Number, y:Number):Entity
+        public function collide(type:String, x:Number, y:Number):Entity
         {
             _point.x = x;
             _point.y = y;
 
-            _point = localToGlobal(_point);
+            _point = parent.localToGlobal(_point);
 
             var cur:Entity = head;
             while(cur)
             {
-                var r:Rectangle = cur.getBounds(stage);
-                if(r.containsPoint(_point))
+                if(cur !== this && type == cur.type)
                 {
-                    return cur;
+                    var r:Rectangle = cur.getBounds(stage);
+                    if(r.containsPoint(_point))
+                    {
+                        return cur;
+                    }
                 }
                 cur = cur.next;
             }

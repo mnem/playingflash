@@ -27,8 +27,9 @@ package noiseandheat.games.playingflash.worlds
         public function activate():void
         {
             add(new FramerateVisualiserEntity());
-            add(new PlayerEntity());
             add(new TargetEntity());
+            for(var i:int = 0; i < 100; i++)
+                add(new PlayerEntity());
         }
 
         public function add(entity:Entity):void

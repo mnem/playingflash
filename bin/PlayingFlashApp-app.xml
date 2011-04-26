@@ -2,7 +2,7 @@
     <id>noiseandheat.games.playingflash.PlayingFlashApp</id>
     <name>Playing Flash</name>
     <filename>PlayingFlashApp</filename>
-    <versionNumber>0.0.1</versionNumber>
+    <versionNumber>0.0.3</versionNumber>
     <initialWindow>
         <content>PlayingFlashApp.swf</content>
         <aspectRatio>portrait</aspectRatio>
